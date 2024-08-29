@@ -43,6 +43,10 @@ public class ProductService {
         if(product.getPrice()!=0.0) {
         	pd.setPrice(product.getPrice());
         }
+        if(product.getCategory()!=null) {
+        	Category ct=categoryRepository.findById(product.getCategory().getId()).orElseThrow(()->new ResourceNotFoundException("category id not found"));
+        	pd.setCategory(ct);
+        }
         return productRepository.save(pd);
     }
 
